@@ -2,6 +2,5 @@ var $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 require("bootstrap");
-require("./variables.less");
-require("./bootswatch.less")
+require("./main.less");
 require("./assets/js/bootswatch.js");
