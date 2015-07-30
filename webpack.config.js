@@ -1,3 +1,4 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
 	entry: [
 	"./client/index.js"
@@ -9,7 +10,7 @@ module.exports = {
 	module: {
 		loaders: [
 		//{ test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
-		{ test: /\.html$/i, loader: "html" },
+		//{ test: /\.html$/i, loader: "html" },
 		{ test: /\.css$/, loader: "style!css" },
 		{ test: /\.less$/i, loader: "style!css!less" },
 		//{ test: /\.scss$/i, loader: "style!css!sass" },
@@ -23,4 +24,5 @@ module.exports = {
 	resolve: {
 		modulesDirectories: ['node_modules'],
 	},
+	plugins: [new HtmlWebpackPlugin()]
 };
