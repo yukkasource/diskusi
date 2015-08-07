@@ -1,4 +1,6 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+//var HtmlWebpackPlugin = require('html-webpack-plugin');
+var Clean = require('clean-webpack-plugin');
+
 module.exports = {
 	entry: [
 	"./client/index.js"
@@ -9,11 +11,8 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-		//{ test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
-		//{ test: /\.html$/i, loader: "html" },
 		{ test: /\.css$/, loader: "style!css" },
 		{ test: /\.less$/i, loader: "style!css!less" },
-		//{ test: /\.scss$/i, loader: "style!css!sass" },
 		{ test: /\.jpe?g$|\.gif$|\.eot(\?v=\d+\.\d+\.\d+)?$|\.png$|\.wav$|\.mp3$/,loader: "file" },
 		{ test: /\.woff[0-9]?(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&mimetype=application/font-woff" },
 		{ test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=application/octet-stream" },
@@ -24,5 +23,8 @@ module.exports = {
 	resolve: {
 		modulesDirectories: ['node_modules'],
 	},
-	plugins: [new HtmlWebpackPlugin()]
+	plugins: [
+		//new HtmlWebpackPlugin(),
+		new Clean(['dist'])
+	]
 };
