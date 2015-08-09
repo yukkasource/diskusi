@@ -49,47 +49,169 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="bs-component">
-              <div class="well">
+              <div id="disc-elem" class="well">
+                <span class="label label-primary left-header">User 1</span>
                 Hi, How are you?
               </div>
-
-
-              <div class="well">
-                Hi, Fine thanks, I attached a file
-                <div style="display: block;" id="showfiles-button" class="btn btn-primary btn-xs">&lt; &gt;</div>
+            </div>
+            
+            <div id="disc-elem-with-attach">
+              <div class="bs-component">
+                <!--Before clicking attachment button-->
+                <div class="well">
+                  <span class="label label-primary left-header">User 2</span>
+                  Hi, Fine thanks, I attached a file
+                  <div style="display: block;" id="showfiles-button" class="btn btn-primary btn-xs">&lt; &gt;</div>
+                </div>
               </div>
-
-
-
-              <div class="modal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h4 class="modal-title">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p><textarea class="form-control" rows="3" id="textArea"></textarea></p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Attach files...</button>
-                      <button type="button" class="btn btn-primary">Send</button>
-                    </div>
-                    <div id="inserting-files">
-                      <div class="modal-body">
-                        <p>tabella files e progress bars</textarea></p>
-                      </div>
-                      <div class="modal-footer">
-                    </div>
+              <div class="bs-component">
+                <!--After clicking attachment button-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span class="label label-primary left-header">User 2</span>
+                    Hi, Fine thanks, I attached a file
+                    <div style="display: block;" id="showfiles-button" class="btn btn-primary btn-xs">&lt; &gt;</div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="bs-component">
+                      <table class="table table-striped table-hover ">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>File</th>
+                            <th>File type</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>File name</td>
+                            <td>
+                              PDF/TXT/IMG...
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-primary btn-xs">Download</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>File name</td>
+                            <td>
+                              PDF/TXT/IMG...
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-primary btn-xs">Download</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>File name</td>
+                            <td>
+                              PDF/TXT/IMG...
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-primary btn-xs">Download</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table> 
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div id="insert-comment">
+              <div class="bs-component">
 
+                <div class="modal">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Modal title</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p><textarea class="form-control" rows="3" id="textArea"></textarea></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Attach files...</button>
+                        <button type="button" class="btn btn-primary">Send</button>
+                      </div>
+                      <div id="inserting-files">
+                        <div class="modal-body">
+                          <div class="bs-component">
+                            <table class="table table-striped table-hover ">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>File</th>
+                                  <th>Progress</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>File name</td>
+                                  <td>
+                                    <div class="bs-component">
+                                      <div class="progress progress-striped active">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <a href="#" class="btn btn-primary btn-xs">Stop</a>
+                                    <a href="#" class="btn btn-primary btn-xs">Delete</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>File name</td>
+                                  <td>
+                                    <div class="bs-component">
+                                      <div class="progress progress-striped active">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <a href="#" class="btn btn-primary btn-xs">Stop</a>
+                                    <a href="#" class="btn btn-primary btn-xs">Delete</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>File name</td>
+                                  <td>
+                                    <div class="bs-component">
+                                      <div class="progress progress-striped active">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <a href="#" class="btn btn-primary btn-xs">Stop</a>
+                                    <a href="#" class="btn btn-primary btn-xs">Delete</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table> 
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
     </div>
   </body>
-  </html>
+</html>
