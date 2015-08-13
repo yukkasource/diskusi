@@ -5,6 +5,8 @@ require("bootstrap");
 require("./main.less");
 require("./assets/js/bootswatch.js");
 require("file?name=index.html!./index.html");
+var React = require('react');
+//require('./components');
 //require("file?name=[path][name].[ext]?[hash]!./assets/img/shopify.png")
 //require("file!./assets/img/shopify.png");
 //require("html!./index.html");
