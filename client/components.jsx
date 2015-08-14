@@ -15,7 +15,7 @@ require("./assets/js/bootswatch");
 */
 var ShowFilesButton = React.createClass({
   render: function() {
-    return(<div style={{display: 'block'}} id="showfiles-button" className="btn btn-primary btn-xs">&lt; &gt;</div>);
+    return(<div style={{display: 'block'}} className="showfiles-button"></div>);
   }
 });
 
