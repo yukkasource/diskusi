@@ -1,6 +1,6 @@
-var React = require('react');
-var mockmodel = require('./mockmodel');
-var $ = require('jquery');
+let React = require('react');
+let mockmodel = require('./mockmodel');
+let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 require("bootstrap");
@@ -8,29 +8,14 @@ require("bootstrap");
 require("./main.less");
 require("./assets/js/bootswatch");
 
-/*
-*****************************************************************
-*                          BUTTONS
-*****************************************************************
-*/
-var ShowFilesButton = React.createClass({
-  render: function() {
-    return(<div style={{display: 'block'}} className="showfiles-button" onClick={this.props.clickHandler}></div>);
-  }
-});
-
-var MiniButton = React.createClass({
-  render: function() {
-    return(<a href="#" className="btn btn-primary btn-xs">{this.props.text}</a>);
-  }
-});
+let buttons = require('./buttons')
 
 /*
 *****************************************************************
 *                          ALERT 
 *****************************************************************
 */
-var AlertWarning = React.createClass({
+let AlertWarning = React.createClass({
   render: function() {
     return(
       <div className="bs-component">
@@ -49,12 +34,12 @@ var AlertWarning = React.createClass({
 *                        COMPONENTS
 *****************************************************************
 */
-var SimpleMessage = React.createClass({
+let SimpleMessage = React.createClass({
   render: function() {
-    var message = this.props.message;
-    var showfiles = '';
+    let message = this.props.message;
+    let showfiles = '';
     if (message.attachments.length > 0){
-        showfiles = <ShowFilesButton clickHandler={this.props.clickHandler} />
+        showfiles = <buttons.ShowFilesButton clickHandler={this.props.clickHandler} />
     }
     return(
         <div className="bs-component well">
@@ -67,9 +52,9 @@ var SimpleMessage = React.createClass({
 });
 
 
-var FilesTable = React.createClass({
+let FilesTable = React.createClass({
   render: function() {
-    var fileRow = function(file){
+    let fileRow = function(file){
       return (
         <tr key={file.id}>
           <td>{file.filename}</td>
@@ -80,7 +65,7 @@ var FilesTable = React.createClass({
             {file.size}
           </td>
           <td>
-            <MiniButton text={'Download'}/>
+            <buttons.MiniButton text={'Download'}/>
           </td>
         </tr>
         );
@@ -105,15 +90,15 @@ var FilesTable = React.createClass({
 });
 
 
-var MessageWithAttachments = React.createClass({
+let MessageWithAttachments = React.createClass({
   render: function() {
-    var message = this.props.message;
+    let message = this.props.message;
     return(
       <div className="bs-component panel panel-default">
         <div className="panel-heading">
           <span className="label label-primary left-header">{message.user}</span>
           {message.text}
-          <ShowFilesButton  clickHandler={this.props.clickHandler} />
+          <buttons.ShowFilesButton  clickHandler={this.props.clickHandler} />
         </div>
         <div className="panel-body">
           <div className="bs-component">
@@ -126,7 +111,7 @@ var MessageWithAttachments = React.createClass({
 });
 
 
-var Message  = React.createClass({
+let Message  = React.createClass({
   getInitialState: function(){
     return {expanded:false};
   },
@@ -134,7 +119,7 @@ var Message  = React.createClass({
     this.setState({expanded:!this.state.expanded});
   },
   render: function() {
-    var message = this.props.message;
+    let message = this.props.message;
     if (this.state.expanded && message.attachments.length != 0) 
       return (<MessageWithAttachments key={this.props.key} message={message} clickHandler={this.handleShowfiles}/>)
     //else
@@ -143,12 +128,12 @@ var Message  = React.createClass({
 });
 
 
-var MessagesList = React.createClass({
+let MessagesList = React.createClass({
   render: function() {
     if (this.props.messages==undefined){
       return <AlertWarning alert = {{header:'No messages',msg:''}}/>;
     }
-    var ret = this.props.messages.map(function(message){
+    let ret = this.props.messages.map(function(message){
       return (<Message key={message.id} message={message}/>);
     });
     return <div>{ret}</div>;
@@ -158,59 +143,10 @@ var MessagesList = React.createClass({
 
 /*
 *****************************************************************
-*                        Mock DATA
-*****************************************************************
-*/
-var MESSAGES = [
-    {id:'1',text:'Hi, How are you?', attachments:[], user:'user1'},
-    {
-      id:'2',
-      text:'Hi, Fine thanks. I attached files', 
-      attachments:[
-          {
-            id:'1',
-            filename:'File1',
-            type:'PDF',
-            size:'10M',
-          },
-          {
-            id:'2',
-            filename:'File2',
-            type:'JPG',
-            size:'1M',
-          }
-      ], user:'user2'
-    },
-    {id:'3',text:'Thanks for files', attachments:[], user:'user1'},
-    {
-      id:'4',
-      text:'Hi, Other',
-      attachments:[
-          {
-            id:'1',
-            filename:'File1',
-            type:'PDF',
-            size:'10M',
-          },
-          {
-            id:'2',
-            filename:'File2',
-            type:'JPG',
-            size:'1M',
-          }
-      ], user:'user2'
-    }
-];
-
-var USER = 'user2';
-
-
-/*
-*****************************************************************
 *                        Rendering
 *****************************************************************
 */
-React.render(<MessagesList messages={MESSAGES}/>,document.getElementById('messages'));
+React.render(<MessagesList messages={mockmodel.MESSAGES}/>,document.getElementById('messages'));
 
 
 
