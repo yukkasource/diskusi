@@ -15,7 +15,7 @@ require("./assets/js/bootswatch");
 */
 var ShowFilesButton = React.createClass({
   render: function() {
-    return(<div style={{display: 'block'}} className="showfiles-button"></div>);
+    return(<div style={{display: 'block'}} className="showfiles-button" onClick={this.props.clickHandler}></div>);
   }
 });
 
@@ -54,7 +54,7 @@ var SimpleMessage = React.createClass({
     var message = this.props.message;
     var showfiles = '';
     if (message.attachments.length > 0){
-        showfiles = <ShowFilesButton />
+        showfiles = <ShowFilesButton clickHandler={this.props.clickHandler} />
     }
     return(
         <div className="bs-component well">
@@ -104,7 +104,8 @@ var FilesTable = React.createClass({
   }
 });
 
-var MessageAttachments = React.createClass({
+
+var MessageWithAttachments = React.createClass({
   render: function() {
     var message = this.props.message;
     return(
@@ -112,7 +113,7 @@ var MessageAttachments = React.createClass({
         <div className="panel-heading">
           <span className="label label-primary left-header">{message.user}</span>
           {message.text}
-          <ShowFilesButton />
+          <ShowFilesButton  clickHandler={this.props.clickHandler} />
         </div>
         <div className="panel-body">
           <div className="bs-component">
@@ -121,6 +122,23 @@ var MessageAttachments = React.createClass({
         </div>
       </div>
       );
+    }
+});
+
+
+var Message  = React.createClass({
+  getInitialState: function(){
+    return {expanded:false};
+  },
+  handleShowfiles: function(){
+    this.setState({expanded:!this.state.expanded});
+  },
+  render: function() {
+    var message = this.props.message;
+    if (this.state.expanded && message.attachments.length != 0) 
+      return (<MessageWithAttachments key={this.props.key} message={message} clickHandler={this.handleShowfiles}/>)
+    //else
+    return(<SimpleMessage key={this.props.key} message={message} clickHandler={this.handleShowfiles} />);
   }
 });
 
@@ -131,11 +149,7 @@ var MessagesList = React.createClass({
       return <AlertWarning alert = {{header:'No messages',msg:''}}/>;
     }
     var ret = this.props.messages.map(function(message){
-      if (message.attachments.length == 0)
-        return (<SimpleMessage key={message.id} message={message}/>);
-      //else
-      return (<MessageAttachments key={message.id} message={message}/>);
-      
+      return (<Message key={message.id} message={message}/>);
     });
     return <div>{ret}</div>;
   }
