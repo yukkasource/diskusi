@@ -4,14 +4,18 @@ window.$ = $;
 window.jQuery = $;
 
 let UploadFilesTable = require('./filestable').UploadFilesTable;
+let NormalButton = require('./buttons').NormalButton;
+let CloseButton = require('./buttons').CloseButton;
+let controller = require('../mock-controller');
 
-exports.TextArea = React.createClass({
+let TextArea = React.createClass({
   render: function() {
     return(
-      <textarea className="form-control" rows="3" id="textArea"></textarea>
+      <textarea className="form-control" rows="3"></textarea>
       );
   }
 });
+
 exports.CreateMessage = React.createClass({
   render: function() {
     return(
@@ -20,19 +24,20 @@ exports.CreateMessage = React.createClass({
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 className="modal-title">Send Message</h4>
+                <CloseButton />
+                <h4 className="modal-title">{'Send Message'}</h4>
               </div>
               <div className="modal-body">
                 <p><TextArea /></p>
               </div>
               <div className="modal-footer">
-                <NormalButton buttonclass"btn-default" label={'Attach Files...'} />
+                <NormalButton buttonclass={'btn-default'} label={'Attach Files...'} />
                 <NormalButton label={'Send'} />
               </div>
-              <div class="modal-body">
-                <div class="bs-component">
+              <div className="modal-body">
+                <div className="bs-component">
                   <UploadFilesTable files={controller.getFiles()} />
+                  <div className="modal-footer"></div>
                 </div>
               </div>
             </div>

@@ -11,6 +11,8 @@ let SimpleMessage = require('./react-components/messages_rendering').SimpleMessa
 let MessageWithAttachments = require('./react-components/messages_rendering').MessageWithAttachments;
 let Message = require('./react-components/messages_rendering').Message;
 
+let CreateMessage = require('./react-components/forms').CreateMessage;
+
 //js modules
 let mockmodel = require('./mockmodel');
 
@@ -23,11 +25,11 @@ let AlertWarning = React.createClass({
   render: function() {
     return(
       <div className="bs-component">
-      <div className="alert alert-dismissible alert-warning">
-      <button type="button" className="close" data-dismiss="alert">&times;</button>
-      <h4>{this.props.alert.header}</h4>
-      <p>{this.props.alert.msg}</p>
-      </div>
+        <div className="alert alert-dismissible alert-warning">
+          <button type="button" className="close" data-dismiss="alert">&times;</button>
+          <h4>{this.props.alert.header}</h4>
+          <p>{this.props.alert.msg}</p>
+        </div>
       </div>
       );
   }
@@ -59,3 +61,4 @@ let MessagesList = React.createClass({
 *****************************************************************
 */
 React.render(<MessagesList messages={mockmodel.MESSAGES}/>,document.getElementById('messages'));
+React.render(<CreateMessage messages={mockmodel.MESSAGES}/>,document.getElementById('insert-comment'));

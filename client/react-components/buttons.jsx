@@ -22,7 +22,13 @@ exports.MiniButton = React.createClass({
 
 exports.NormalButton = React.createClass({
   render: function() {
-    let bclass = this.props.buttonclass!=undefined?'btn-primary':this.props.buttonclass;
-    return (<button type="button" className="btn {bclass}" onClick={this.props.clickHandler}>{this.props.label}</button>);
+    let bclass = this.props.buttonclass==undefined?'btn btn-primary':'btn '+this.props.buttonclass;
+    return (<button type="button" className={bclass} onClick={this.props.clickHandler}>{this.props.label}</button>);
+  }
+});
+
+exports.CloseButton = React.createClass({
+  render: function() {
+    return(<button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>);
   }
 });
