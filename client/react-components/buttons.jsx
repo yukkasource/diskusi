@@ -1,12 +1,7 @@
 let React = require('react');
-let mockmodel = require('./mockmodel');
 let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
-require("bootstrap");
-//require('react-bootstrap');
-require("./main.less");
-require("./assets/js/bootswatch");
 
 /*
 *****************************************************************
@@ -21,6 +16,13 @@ exports.ShowFilesButton = React.createClass({
 
 exports.MiniButton = React.createClass({
   render: function() {
-    return(<a href="#" className="btn btn-primary btn-xs">{this.props.text}</a>);
+    return(<a href="#" className="btn btn-primary btn-xs" onClick={this.props.clickHandler}>{this.props.label}</a>);
+  }
+});
+
+exports.NormalButton = React.createClass({
+  render: function() {
+    let bclass = this.props.buttonclass!=undefined?'btn-primary':this.props.buttonclass;
+    return (<button type="button" className="btn {bclass}" onClick={this.props.clickHandler}>{this.props.label}</button>);
   }
 });
