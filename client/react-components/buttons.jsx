@@ -16,7 +16,7 @@ exports.ShowFilesButton = React.createClass({
 
 exports.MiniButton = React.createClass({
   render: function() {
-    return(<a href="#" className="btn btn-primary btn-xs" onClick={this.props.clickHandler}>{this.props.label}</a>);
+    return(<span><a key={this.props.key} href="#" className="btn btn-primary btn-xs" onClick={this.props.clickHandler}>{this.props.label}</a>&nbsp;</span>);
   }
 });
 

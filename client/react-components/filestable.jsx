@@ -4,6 +4,7 @@ window.$ = $;
 window.jQuery = $;
 
 let MiniButton = require('./buttons').MiniButton;
+let NormalButton = require('./buttons').NormalButton;
 
 exports.FilesTable = React.createClass({
   render: function() {
@@ -19,7 +20,7 @@ exports.FilesTable = React.createClass({
             {file.size}
           </td>
           <td>
-            <MiniButton label={'Download'}/>
+            <MiniButton label={'Download'}/>&nbsp;
           </td>
         </tr>
         );
@@ -47,22 +48,25 @@ exports.FilesTable = React.createClass({
 exports.UploadFilesTable = React.createClass({
   render: function() {
     let fileRow = function(file){
-      let progressStatusClass = file.progress=='100'?'progress-bar progress-bar-success':'progress-bar';
+      let progressBarStatusClass = file.progress=='100'?'progress-bar progress-bar-success':'progress-bar';
+      let progressDivClass = file.progress=='100'?'progress progress-striped':'progress progress-striped active';
+      let actions = file.progress=='100'?[['1','Delete'],['2','Download']]:[['1','Stop']];
+      let actionButtons = actions.map(function(action){
+        return (<MiniButton key={action[0]} label={action[1]} />);
+      });
       return (
         <tr key={file.id}>
           <td>{file.id}</td>
           <td>{file.filename}</td>
           <td>
             <div className="bs-component">
-              <div className="progress progress-striped active">
-                <div className={progressStatusClass} style={{width: file.progress+'%'}}></div>
+              <div className={progressDivClass}>
+                <div className={progressBarStatusClass} style={{width: file.progress+'%'}}></div>
               </div>
             </div>
           </td>
           <td>
-            <MiniButton label={'Stop'}/>
-            <MiniButton label={'Delete'}/>
-            <MiniButton label={'Download'}/>
+            {actionButtons}
           </td>
         </tr>
         );
@@ -80,6 +84,9 @@ exports.UploadFilesTable = React.createClass({
         </thead>
         <tbody>
           {this.props.files.map(fileRow)}
+          <tr>
+            <td colSpan="4"><NormalButton label={'Add File...'} /></td>
+          </tr>
         </tbody>
       </table> 
       );
