@@ -85,7 +85,7 @@ exports.UploadFilesTable = React.createClass({
         <tbody>
           {this.props.files.map(fileRow)}
           <tr>
-            <td colSpan="4"><NormalButton label={'Add File...'} /></td>
+            <td colSpan="4"><NormalButton label={'Add File...'} clickHandler={this.props.addFileHandler}/></td>
           </tr>
         </tbody>
       </table> 

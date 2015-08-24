@@ -16,9 +16,9 @@ let SimpleMessage= React.createClass({
     }
     return(
       <div className="bs-component well">
-      <span className="label label-primary left-header">{message.user}</span>
-      {message.text}
-      {showfiles}
+        <span className="label label-primary left-header">{message.user}</span>
+        {message.text}
+        {showfiles}
       </div>
       );
   }
@@ -30,16 +30,16 @@ let MessageWithAttachments = React.createClass({
     let message = this.props.message;
     return(
       <div className="bs-component panel panel-default">
-      <div className="panel-heading">
-      <span className="label label-primary left-header">{message.user}</span>
-      {message.text}
-      <ShowFilesButton clickHandler={this.props.clickHandler} />
-      </div>
-      <div className="panel-body">
-      <div className="bs-component">
-      <FilesTable files={message.attachments} />
-      </div>
-      </div>
+        <div className="panel-heading">
+          <span className="label label-primary left-header">{message.user}</span>
+          {message.text}
+          <ShowFilesButton clickHandler={this.props.clickHandler} />
+        </div>
+        <div className="panel-body">
+          <div className="bs-component">
+            <FilesTable files={message.attachments} />
+          </div>
+        </div>
       </div>
       );
   }

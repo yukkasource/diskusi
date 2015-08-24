@@ -29,6 +29,6 @@ exports.NormalButton = React.createClass({
 
 exports.CloseButton = React.createClass({
   render: function() {
-    return(<button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>);
+    return(<button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this.props.clickHandler}>×</button>);
   }
 });
