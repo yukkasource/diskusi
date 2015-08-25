@@ -45,7 +45,20 @@ exports.FilesTable = React.createClass({
   }
 });
 
-exports.UploadFilesTable = React.createClass({
+let UploadButton = React.createClass({
+  render: function() {
+    return(
+      <form encType="multipart/form-data">
+        <div style={{display: 'block'}} className="btn btn-primary" onClick={this.props.clickHandler}>
+          {this.props.label}
+          <input id="image-file" type="file" multiple style={{opacity:0}}/>
+        </div>
+      </form>
+      );
+  }
+});
+
+let UploadingFilesTable = React.createClass({
   render: function() {
     let fileRow = function(file){
       let progressBarStatusClass = file.progress=='100'?'progress-bar progress-bar-success':'progress-bar';
@@ -85,10 +98,20 @@ exports.UploadFilesTable = React.createClass({
         <tbody>
           {this.props.files.map(fileRow)}
           <tr>
-            <td colSpan="4"><NormalButton label={'Add File...'} clickHandler={this.props.addFileHandler}/></td>
+            <td colSpan="4"><UploadButton label={'Add File...'} clickHandler={this.props.addFileHandler}/></td>
           </tr>
         </tbody>
       </table> 
       );
+  }
+});
+
+exports.UploadFilesTable = React.createClass({
+  render: function() {
+    return(
+      <UploadingFilesTable 
+        files={this.props.files} 
+        addFileHandler={this.props.addFileHandler}/>
+        );
   }
 });
