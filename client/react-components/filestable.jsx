@@ -6,6 +6,8 @@ window.jQuery = $;
 let MiniButton = require('./buttons').MiniButton;
 let NormalButton = require('./buttons').NormalButton;
 
+function getProgress(){return 1;}
+
 exports.FilesTable = React.createClass({
   render: function() {
     let fileRow = function(file){
@@ -49,9 +51,9 @@ let UploadButton = React.createClass({
   render: function() {
     return(
       <form encType="multipart/form-data">
-        <div style={{display: 'block'}} className="btn btn-primary" onClick={this.props.clickHandler}>
+        <div className="fileUpload btn btn-primary" >
           {this.props.label}
-          <input id="image-file" type="file" multiple style={{opacity:0}}/>
+          <input id="image-file" type="file" multiple className="upload" onChange={this.props.clickHandler}/>
         </div>
       </form>
       );
@@ -98,7 +100,7 @@ let UploadingFilesTable = React.createClass({
         <tbody>
           {this.props.files.map(fileRow)}
           <tr>
-            <td colSpan="4"><UploadButton label={'Add File...'} clickHandler={this.props.addFileHandler}/></td>
+            <td colSpan="4"><UploadButton label={'Add Files...'} clickHandler={this.props.addFileHandler}/></td>
           </tr>
         </tbody>
       </table> 
@@ -107,11 +109,34 @@ let UploadingFilesTable = React.createClass({
 });
 
 exports.UploadFilesTable = React.createClass({
+  getInitialState: function(){
+    return  {
+              files:[],
+            };
+  },
+  addFileHandler: function(e) {
+    let files = e.target.files;
+    console.log('Received files: ', files);
+    var mappedFiles = []
+    for (let i=0; i<files.length;i++){
+      console.log('adding: ', i);
+      mappedFiles.push({
+          id: i+1,
+          filename: files[i].name,
+          progress: (getProgress() / files[i].size ) *100
+      });
+    }
+    
+    this.setState({
+      files: mappedFiles
+    });
+    console.log('status: ', this.state.files);
+  },
   render: function() {
     return(
       <UploadingFilesTable 
-        files={this.props.files} 
-        addFileHandler={this.props.addFileHandler}/>
+        files={this.state.files} 
+        addFileHandler={this.addFileHandler}/>
         );
   }
 });
