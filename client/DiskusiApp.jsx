@@ -14,7 +14,7 @@ let Message = require('./react-components/messages_rendering').Message;
 let CreateMessage = require('./react-components/forms').CreateMessage;
 
 //js modules
-let mockmodel = require('./mockmodel');
+let store = require('./store/mock-store');
 
 /*
 *****************************************************************
@@ -43,11 +43,16 @@ let AlertWarning = React.createClass({
 
 
 let MessagesList = React.createClass({
+  getInitialState: function(){
+    return  {
+      messages: store.getMessages(),
+    };
+  },
   render: function() {
-    if (this.props.messages==undefined){
+    if (this.state.messages == undefined){
       return <AlertWarning alert = {{header:'No messages',msg:''}}/>;
     }
-    let ret = this.props.messages.map(function(message){
+    let ret = this.state.messages.map(function(message){
       return (<Message key={message.id} message={message}/>);
     });
     return <div>{ret}</div>;
@@ -60,5 +65,5 @@ let MessagesList = React.createClass({
 *                        Rendering
 *****************************************************************
 */
-React.render(<MessagesList messages={mockmodel.MESSAGES}/>,document.getElementById('messages'));
-React.render(<CreateMessage messages={mockmodel.MESSAGES}/>,document.getElementById('insert-comment'));
+React.render(<MessagesList />,document.getElementById('messages'));
+React.render(<CreateMessage />,document.getElementById('insert-comment'));

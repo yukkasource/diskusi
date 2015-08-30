@@ -6,7 +6,7 @@ window.jQuery = $;
 let UploadFilesTable = require('./filestable').UploadFilesTable;
 let NormalButton = require('./buttons').NormalButton;
 let CloseButton = require('./buttons').CloseButton;
-let controller = require('../mock-controller');
+let store = require('../store/mock-store');
 
 
 let TextArea = React.createClass({
@@ -50,7 +50,7 @@ exports.CreateMessage = React.createClass({
   },
   render: function() {
     if (this.state.newMessage){
-      let uploadForm = this.state.attachFiles?<UploadFilesTable files={controller.getFiles()} addFileHandler={this.handleAttachFiles}/>:'';
+      let uploadForm = this.state.attachFiles?<UploadFilesTable files={store.getFiles()} addFileHandler={this.handleAttachFiles}/>:'';
       var formNewMessage = 
         <div className="modal">
             <div className="modal-dialog">

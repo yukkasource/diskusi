@@ -1,6 +1,6 @@
 var React = require('react');
 window.React = React;
-require('./components');
+require('./DiskusiApp');
 var $ = require('jquery');
 window.$ = $;
 window.jQuery = $;

@@ -111,8 +111,8 @@ let UploadingFilesTable = React.createClass({
 exports.UploadFilesTable = React.createClass({
   getInitialState: function(){
     return  {
-              files:[],
-            };
+      files:[],
+    };
   },
   addFileHandler: function(e) {
     let files = e.target.files;
