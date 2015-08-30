@@ -11,7 +11,7 @@ let SimpleMessage = require('./react-components/messages_rendering').SimpleMessa
 let MessageWithAttachments = require('./react-components/messages_rendering').MessageWithAttachments;
 let Message = require('./react-components/messages_rendering').Message;
 
-let CreateMessage = require('./react-components/forms').CreateMessage;
+let CreateMessage = require('./react-components/CreateMessage');
 
 //js modules
 let store = require('./store/mock-store');

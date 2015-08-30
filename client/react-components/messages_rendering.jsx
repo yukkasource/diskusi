@@ -3,7 +3,7 @@ let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 
-let ShowFilesButton = require('./buttons').ShowFilesButton;
+let ShowFilesButton = require('./commons').ShowFilesButton;
 
 let FilesTable = require('./filestable').FilesTable;
 

@@ -3,8 +3,8 @@ let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 
-let MiniButton = require('./buttons').MiniButton;
-let NormalButton = require('./buttons').NormalButton;
+let MiniButton = require('./commons').MiniButton;
+let NormalButton = require('./commons').NormalButton;
 
 function getProgress(){return 1;}
 
