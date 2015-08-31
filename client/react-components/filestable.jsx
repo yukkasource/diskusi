@@ -3,8 +3,8 @@ let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 
-let MiniButton = require('./buttons').MiniButton;
-let NormalButton = require('./buttons').NormalButton;
+let MiniButton = require('./commons').MiniButton;
+let NormalButton = require('./commons').NormalButton;
 
 function getProgress(filename){return 1;}
 
@@ -111,8 +111,8 @@ let UploadingFilesTable = React.createClass({
 exports.UploadFilesTable = React.createClass({
   getInitialState: function(){
     return  {
-              files:[],
-            };
+      files:[],
+    };
   },
   addFileHandler: function(e) {
     let files = e.target.files;

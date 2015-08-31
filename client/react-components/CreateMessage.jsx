@@ -4,22 +4,14 @@ window.$ = $;
 window.jQuery = $;
 
 let UploadFilesTable = require('./filestable').UploadFilesTable;
-let NormalButton = require('./buttons').NormalButton;
-let CloseButton = require('./buttons').CloseButton;
-let controller = require('../mock-controller');
-
-
-let TextArea = React.createClass({
-  render: function() {
-    return(
-      <textarea className="form-control" rows="3"></textarea>
-      );
-  }
-});
+let NormalButton = require('./commons').NormalButton;
+let CloseButton = require('./commons').CloseButton;
+let TextArea = require('./commons').TextArea;
+let store = require('../store/mock-store');
 
 
 
-exports.CreateMessage = React.createClass({
+let CreateMessage = React.createClass({
   getInitialState: function(){
     return  {
               newMessage:false,
@@ -50,7 +42,14 @@ exports.CreateMessage = React.createClass({
   },
   render: function() {
     if (this.state.newMessage){
-      let uploadForm = this.state.attachFiles?<UploadFilesTable files={controller.getFiles()} addFileHandler={this.handleAttachFiles}/>:'';
+      let uploadForm = '';
+      if (this.state.attachFiles){
+        uploadForm = 
+        <div>
+          <UploadFilesTable files={store.getFiles()}/>
+          <div className="modal-footer"></div>
+        </div>
+      }
       var formNewMessage = 
         <div className="modal">
             <div className="modal-dialog">
@@ -69,7 +68,6 @@ exports.CreateMessage = React.createClass({
                 <div className="modal-body">
                   <div className="bs-component">
                     {uploadForm}
-                    <div className="modal-footer"></div>
                   </div>
                 </div>
               </div>
@@ -85,3 +83,5 @@ exports.CreateMessage = React.createClass({
       );
   }
 });
+
+module.exports = CreateMessage;

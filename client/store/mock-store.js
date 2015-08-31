@@ -1,9 +1,13 @@
+let AppDispatcher = require('../AppDispatcher');
+
 /*
 *****************************************************************
 *                        Mock DATA
 *****************************************************************
 */
-exports.MESSAGES = [
+
+
+let MESSAGES = [
     {id:'1',text:'Hi, How are you?', attachments:[], user:'user1'},
     {
       id:'2',
@@ -45,3 +49,38 @@ exports.MESSAGES = [
 ];
 
 exports.USER = 'user2';
+
+var MockStore = {
+  getFiles : function(){
+    return [
+      {
+        id:'1',
+        filename:'File1',
+        progress:'45'
+      },
+      {
+        id:'2',
+        filename:'File2',
+        progress:'100'
+      }
+    ];
+  },
+  getMessages : function(){
+    return MESSAGES;
+  }
+};
+
+AppDispatcher.register(function(action) {
+  /*switch(action.actionType) {
+    case Constants.MSG_CREATE:
+      
+      break;
+    case Constants.FILEUPL_CREATE:
+      
+      break;
+    default:
+      // no op
+  }*/
+}); 
+
+module.exports = MockStore;

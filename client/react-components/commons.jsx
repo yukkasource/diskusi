@@ -32,3 +32,11 @@ exports.CloseButton = React.createClass({
     return(<button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this.props.clickHandler}>×</button>);
   }
 });
+
+exports.TextArea = React.createClass({
+  render: function() {
+    return(
+      <textarea className="form-control" rows="3"></textarea>
+      );
+  }
+});

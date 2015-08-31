@@ -9,6 +9,7 @@
     "css-loader": "^0.15.6",
     "expose-loader": "^0.7.0",
     "file-loader": "^0.8.4",
+    "flux": "^2.1.1",
     "html-loader": "^0.3.0",
     "html-webpack-plugin": "^1.6.0",
     "jquery": "^2.1.4",
