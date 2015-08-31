@@ -6,7 +6,7 @@ window.jQuery = $;
 let MiniButton = require('./buttons').MiniButton;
 let NormalButton = require('./buttons').NormalButton;
 
-function getProgress(){return 1;}
+function getProgress(filename){return 1;}
 
 exports.FilesTable = React.createClass({
   render: function() {
@@ -123,7 +123,7 @@ exports.UploadFilesTable = React.createClass({
       mappedFiles.push({
           id: i+1,
           filename: files[i].name,
-          progress: (getProgress() / files[i].size ) *100
+          progress: (getProgress(files[i].name) / files[i].size ) *100
       });
     }
     
