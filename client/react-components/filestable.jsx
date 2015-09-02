@@ -116,10 +116,10 @@ exports.UploadFilesTable = React.createClass({
   },
   addFileHandler: function(e) {
     let files = e.target.files;
-    console.log('Received files: ', files);
+    //console.log('Received files: ', files);
     let id = this.state.files.length;
     for (let i=0; i<files.length;i++,id++){
-      console.log('adding: ', i);
+      //console.log('adding: ', i);
       this.state.files.push({
           id: id+1,
           filename: files[i].name,
@@ -127,7 +127,11 @@ exports.UploadFilesTable = React.createClass({
       });
     }
     this.setState({files:this.state.files});
-    console.log('status: ', this.state.files);
+
+    /**
+    * Calling the upload handler that uploads the file on server
+    */ 
+    this.props.uploadHandler(files);
   },
   render: function() {
     return(

@@ -40,13 +40,16 @@ let CreateMessage = React.createClass({
         attachFiles:false
       });
   },
+  uploadFile: function(files){
+    console.log('uploadFile: ', files);
+  },
   render: function() {
     if (this.state.newMessage){
       let uploadForm = '';
       if (this.state.attachFiles){
         uploadForm = 
         <div>
-          <UploadFilesTable files={store.getFiles()}/>
+          <UploadFilesTable uploadHandler={this.uploadFile}/>
           <div className="modal-footer"></div>
         </div>
       }
