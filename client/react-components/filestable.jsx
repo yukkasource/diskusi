@@ -117,19 +117,16 @@ exports.UploadFilesTable = React.createClass({
   addFileHandler: function(e) {
     let files = e.target.files;
     console.log('Received files: ', files);
-    var mappedFiles = []
-    for (let i=0; i<files.length;i++){
+    let id = this.state.files.length;
+    for (let i=0; i<files.length;i++,id++){
       console.log('adding: ', i);
-      mappedFiles.push({
-          id: i+1,
+      this.state.files.push({
+          id: id+1,
           filename: files[i].name,
           progress: (getProgress(files[i].name) / files[i].size ) *100
       });
     }
-    
-    this.setState({
-      files: mappedFiles
-    });
+    this.setState({files:this.state.files});
     console.log('status: ', this.state.files);
   },
   render: function() {
