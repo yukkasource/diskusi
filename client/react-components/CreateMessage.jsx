@@ -8,6 +8,7 @@ let NormalButton = require('./commons').NormalButton;
 let CloseButton = require('./commons').CloseButton;
 let TextArea = require('./commons').TextArea;
 let store = require('../store/mock-store');
+let FileActions = require('../actions/FileActions');
 
 
 
@@ -41,7 +42,7 @@ let CreateMessage = React.createClass({
       });
   },
   uploadFile: function(files){
-    console.log('uploadFile: ', files);
+    FileActions.uploadFiles(files);
   },
   render: function() {
     if (this.state.newMessage){

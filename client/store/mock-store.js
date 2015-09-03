@@ -1,5 +1,5 @@
 let AppDispatcher = require('../AppDispatcher');
-
+var Constants = require('../Constants');
 /*
 *****************************************************************
 *                        Mock DATA
@@ -71,16 +71,16 @@ var MockStore = {
 };
 
 AppDispatcher.register(function(action) {
-  /*switch(action.actionType) {
-    case Constants.MSG_CREATE:
-      
+  switch(action.actionType) {
+    case Constants.UPLOAD_FILES:
+      console.log("mockStore upload: "+action.files);
       break;
-    case Constants.FILEUPL_CREATE:
+    /*case Constants.FILEUPL_CREATE:
       
-      break;
+      break;*/
     default:
       // no op
-  }*/
+  }
 }); 
 
 module.exports = MockStore;
