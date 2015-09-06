@@ -8,7 +8,8 @@ let NormalButton = require('./commons').NormalButton;
 let CloseButton = require('./commons').CloseButton;
 let TextArea = require('./commons').TextArea;
 let store = require('../store/mock-store');
-let FileActions = require('../actions/FileActions');
+
+let FileHandlers = require('../utils/FileHandlers');
 
 
 
@@ -41,16 +42,18 @@ let CreateMessage = React.createClass({
         attachFiles:false
       });
   },
-  uploadFile: function(files){
-    FileActions.uploadFiles(files);
-  },
+
   render: function() {
     if (this.state.newMessage){
       let uploadForm = '';
       if (this.state.attachFiles){
         uploadForm = 
         <div>
-          <UploadFilesTable uploadHandler={this.uploadFile}/>
+          <UploadFilesTable 
+            uploadHandler={FileHandlers.uploadHandler}
+            deleteHandler={FileHandlers.deleteHandler}
+            downloadHandler={FileHandlers.downloadHandler}
+            stopHandler={FileHandlers.stopHandler}/>
           <div className="modal-footer"></div>
         </div>
       }

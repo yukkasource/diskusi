@@ -22,7 +22,7 @@ exports.FilesTable = React.createClass({
             {file.size}
           </td>
           <td>
-            <MiniButton label={'Download'}/>&nbsp;
+            <MiniButton label={'Download'} clickHandler={this.props.downloadHandler.bind(this,file)}/>&nbsp;
           </td>
         </tr>
         );
@@ -40,7 +40,7 @@ exports.FilesTable = React.createClass({
           </tr>
         </thead>
         <tbody>
-          {this.props.files.map(fileRow)}
+          {this.props.files.map(fileRow.bind(this))}
         </tbody>
       </table> 
       );
@@ -65,9 +65,14 @@ let UploadingFilesTable = React.createClass({
     let fileRow = function(file){
       let progressBarStatusClass = file.progress=='100'?'progress-bar progress-bar-success':'progress-bar';
       let progressDivClass = file.progress=='100'?'progress progress-striped':'progress progress-striped active';
-      let actions = file.progress=='100'?[['1','Delete'],['2','Download']]:[['1','Stop']];
+       
+      if (file.progress=='100'){
+        var actions = [['1','Delete',this.props.deleteHandler],['2','Download',this.props.downloadHandler]]
+      }else{
+        var actions = [['1','Stop',this.props.stopHandler]];
+      }
       let actionButtons = actions.map(function(action){
-        return (<MiniButton key={action[0]} label={action[1]} />);
+        return (<MiniButton key={action[0]} label={action[1]} clickHandler={action[2].bind(this,file)}/>);
       });
       return (
         <tr key={file.id}>
@@ -98,7 +103,7 @@ let UploadingFilesTable = React.createClass({
           </tr>
         </thead>
         <tbody>
-          {this.props.files.map(fileRow)}
+          {this.props.files.map(fileRow.bind(this))}
           <tr>
             <td colSpan="4"><UploadButton label={'Add Files...'} clickHandler={this.props.addFileHandler}/></td>
           </tr>
@@ -137,7 +142,10 @@ exports.UploadFilesTable = React.createClass({
     return(
       <UploadingFilesTable 
         files={this.state.files} 
-        addFileHandler={this.addFileHandler}/>
+        addFileHandler={this.addFileHandler}
+        deleteHandler={this.props.deleteHandler}
+        downloadHandler={this.props.downloadHandler}
+        stopHandler={this.props.stopHandler} />
         );
   }
 });

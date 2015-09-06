@@ -2,6 +2,7 @@ let React = require('react');
 let $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
+let FileHandlers = require('../utils/FileHandlers');
 
 let ShowFilesButton = require('./commons').ShowFilesButton;
 
@@ -37,7 +38,7 @@ let MessageWithAttachments = React.createClass({
         </div>
         <div className="panel-body">
           <div className="bs-component">
-            <FilesTable files={message.attachments} />
+            <FilesTable files={message.attachments} downloadHandler={FileHandlers.downloadHandler}/>
           </div>
         </div>
       </div>

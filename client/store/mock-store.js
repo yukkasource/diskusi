@@ -75,9 +75,15 @@ AppDispatcher.register(function(action) {
     case Constants.UPLOAD_FILES:
       console.log("mockStore upload: "+action.files);
       break;
-    /*case Constants.FILEUPL_CREATE:
-      
-      break;*/
+    case Constants.STOP_UPLOAD_FILE:
+      console.log("mockStore stop upload: "+action.file);
+      break;
+    case Constants.DOWNLOAD_FILE:
+      console.log("mockStore download: "+action.file);
+      break;
+    case Constants.DELETE_FILE:
+      console.log("mockStore delete: "+action.file);
+      break;
     default:
       // no op
   }

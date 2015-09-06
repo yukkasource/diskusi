@@ -12,7 +12,24 @@ var FileActions = {
       files: files
     });
   },
-
+  stopUploadFile: function(file) {
+    AppDispatcher.dispatch({
+      actionType: Constants.STOP_UPLOAD_FILE,
+      file: file
+    });
+  },
+  deleteFile: function(file) {
+    AppDispatcher.dispatch({
+      actionType: Constants.DOWNLOAD_FILE,
+      file: file
+    });
+  },
+  downloadFile: function(file) {
+    AppDispatcher.dispatch({
+      actionType: Constants.DELETE_FILE,
+      file: file
+    });
+  },
 
 }
 
