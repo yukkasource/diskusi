@@ -72,6 +72,10 @@ var MockStore = {
 
 AppDispatcher.register(function(action) {
   switch(action.actionType) {
+    case Constants.MSG_CREATE:
+      console.log("create message: "+action.text);
+      break;
+
     case Constants.UPLOAD_FILES:
       console.log("mockStore upload: "+action.files);
       break;

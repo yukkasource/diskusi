@@ -8,21 +8,30 @@ let NormalButton = require('./commons').NormalButton;
 let CloseButton = require('./commons').CloseButton;
 let TextArea = require('./commons').TextArea;
 let store = require('../store/mock-store');
-
+let Actions = require('../actions/Actions');
 let FileHandlers = require('../utils/FileHandlers');
 
 
 
 let CreateMessage = React.createClass({
   getInitialState: function(){
-    return  {
-              newMessage:false,
-              attachFiles:false
-            };
+    return {
+      value:'',
+      newMessage:false,
+      attachFiles:false
+    };
+  },
+  _onChange: function(/*object*/ event) {
+    this.setState({
+      value: event.target.value,
+      newMessage:this.state.newMessage,
+      attachFiles:this.state.attachFiles
+    });
   },
   handleNewMessage: function(){
     this.setState(
       {
+        value:this.state.value,
         newMessage:!this.state.newMessage,
         attachFiles:false
       });
@@ -30,6 +39,7 @@ let CreateMessage = React.createClass({
   handleAttachFiles: function(){
     this.setState(
       {
+        value:this.state.value,
         newMessage:this.state.newMessage,
         attachFiles:true
       });
@@ -38,9 +48,13 @@ let CreateMessage = React.createClass({
   handleClose: function(){
     this.setState(
       {
+        value:'',
         newMessage:!this.state.newMessage,
         attachFiles:false
       });
+  },
+  sendHandler: function(){
+    Actions.createMessage(this.state.value);
   },
 
   render: function() {
@@ -66,11 +80,11 @@ let CreateMessage = React.createClass({
                   <h4 className="modal-title">{'Send Message'}</h4>
                 </div>
                 <div className="modal-body">
-                  <p><TextArea id="message-text"/></p>
+                  <p><TextArea name="messageText" onChange={this._onChange}/></p>
                 </div>
                 <div className="modal-footer">
                   <NormalButton buttonclass={'btn-default'} label={'Attach Files...'} clickHandler={this.handleAttachFiles}  />
-                  <NormalButton label={'Send'} />
+                  <NormalButton label={'Send'} clickHandler={this.sendHandler}/>
                 </div>
                 <div className="modal-body">
                   <div className="bs-component">
