@@ -21,7 +21,7 @@ let CreateMessage = React.createClass({
       attachFiles:false
     };
   },
-  _onChange: function(/*object*/ event) {
+  handleChange: function(event) {
     this.setState({
       value: event.target.value,
       newMessage:this.state.newMessage,
@@ -58,6 +58,7 @@ let CreateMessage = React.createClass({
   },
 
   render: function() {
+    let value = this.state.value;
     if (this.state.newMessage){
       let uploadForm = '';
       if (this.state.attachFiles){
@@ -80,7 +81,7 @@ let CreateMessage = React.createClass({
                   <h4 className="modal-title">{'Send Message'}</h4>
                 </div>
                 <div className="modal-body">
-                  <p><TextArea name="messageText" onChange={this._onChange}/></p>
+                  <p><TextArea value={value} onChange={this.handleChange}/></p>
                 </div>
                 <div className="modal-footer">
                   <NormalButton buttonclass={'btn-default'} label={'Attach Files...'} clickHandler={this.handleAttachFiles}  />

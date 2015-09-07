@@ -36,7 +36,7 @@ exports.CloseButton = React.createClass({
 exports.TextArea = React.createClass({
   render: function() {
     return(
-      <textarea className="form-control" rows="3"></textarea>
+      <textarea className="form-control" rows="3" onChange={this.props.onChange}></textarea>
       );
   }
 });
