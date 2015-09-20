@@ -14,7 +14,7 @@ let Message = require('./react-components/messages_rendering').Message;
 let CreateMessage = require('./react-components/CreateMessage');
 
 //js modules
-let store = require('./store/mock-store');
+let MessageStore = require('./store/mock-store');
 
 /*
 *****************************************************************
@@ -40,13 +40,22 @@ let AlertWarning = React.createClass({
 *                        COMPONENTS
 *****************************************************************
 */
-
+function getStateFromStores(){
+  return {
+      messages: MessageStore.getMessages(),
+    };
+}
 
 let MessagesList = React.createClass({
   getInitialState: function(){
-    return  {
-      messages: store.getMessages(),
-    };
+    return getStateFromStores()
+  },
+  componentDidMount: function() {
+    MessageStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    MessageStore.removeChangeListener(this._onChange);
   },
   render: function() {
     if (this.state.messages == undefined){
@@ -56,6 +65,9 @@ let MessagesList = React.createClass({
       return (<Message key={message.id} message={message}/>);
     });
     return <div>{ret}</div>;
+  },
+  _onChange: function() {
+    this.setState(getStateFromStores());
   }
 });
 

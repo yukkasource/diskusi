@@ -1,5 +1,7 @@
 let AppDispatcher = require('../AppDispatcher');
-var Constants = require('../Constants');
+let Constants = require('../Constants');
+let EventEmitter = require('events').EventEmitter;
+let assign = require('object-assign');
 /*
 *****************************************************************
 *                        Mock DATA
@@ -7,7 +9,7 @@ var Constants = require('../Constants');
 */
 
 
-let MESSAGES = [
+let _messages = [
     {id:'1',text:'Hi, How are you?', attachments:[], user:'user1'},
     {
       id:'2',
@@ -48,49 +50,53 @@ let MESSAGES = [
     }
 ];
 
+
 exports.USER = 'user2';
 
-var MockStore = {
-  getFiles : function(){
-    return [
-      {
-        id:'1',
-        filename:'File1',
-        progress:'45'
-      },
-      {
-        id:'2',
-        filename:'File2',
-        progress:'100'
-      }
-    ];
+var MessageStore = assign({}, EventEmitter.prototype,{
+  emitChange: function() {
+    this.emit(Constants.CHANGE_STATE);
+  },
+  /**
+   * @param {function} callback
+   */
+  addChangeListener: function(callback) {
+    this.on(Constants.CHANGE_STATE, callback);
+  },
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_STATE, callback);
   },
   getMessages : function(){
-    return MESSAGES;
+    return _messages;
   }
-};
+});
 
-AppDispatcher.register(function(action) {
+MessageStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.actionType) {
     case Constants.MSG_CREATE:
       console.log("create message: "+action.text);
+      _messages.push({id:(_messages.length+1).toString(),text:action.text, attachments:[], user:'user1'}); 
+      MessageStore.emitChange();
       break;
-
     case Constants.UPLOAD_FILES:
-      console.log("mockStore upload: "+action.files);
+      console.log("messageStore upload: "+action.files);
+      MessageStore.emitChange();
       break;
     case Constants.STOP_UPLOAD_FILE:
-      console.log("mockStore stop upload: "+action.file);
+      console.log("messageStore stop upload: "+action.file);
+      MessageStore.emitChange();
       break;
     case Constants.DOWNLOAD_FILE:
-      console.log("mockStore download: "+action.file);
+      console.log("messageStore download: "+action.file);
+      MessageStore.emitChange();
       break;
     case Constants.DELETE_FILE:
-      console.log("mockStore delete: "+action.file);
+      console.log("messageStore delete: "+action.file);
+      MessageStore.emitChange();
       break;
     default:
       // no op
   }
 }); 
 
-module.exports = MockStore;
+module.exports = MessageStore;

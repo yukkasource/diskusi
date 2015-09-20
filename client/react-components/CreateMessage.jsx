@@ -55,6 +55,7 @@ let CreateMessage = React.createClass({
   },
   sendHandler: function(){
     Actions.createMessage(this.state.value);
+    this.handleClose();
   },
 
   render: function() {
