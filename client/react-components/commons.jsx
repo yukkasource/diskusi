@@ -16,14 +16,18 @@ exports.ShowFilesButton = React.createClass({
 
 exports.MiniButton = React.createClass({
   render: function() {
-    return(<span><div key={this.props.key} className="btn btn-primary btn-xs" onClick={this.props.clickHandler}>{this.props.label}</div>&nbsp;</span>);
+    if (this.props.active==undefined || this.props.active==true)
+      var activeOnClick =this.props.clickHandler;
+    return(<span><div key={this.props.key} className="btn btn-primary btn-xs" onClick={activeOnClick}>{this.props.label}</div>&nbsp;</span>);
   }
 });
 
 exports.NormalButton = React.createClass({
   render: function() {
     let bclass = this.props.buttonclass==undefined?'btn btn-primary':'btn '+this.props.buttonclass;
-    return (<button type="button" className={bclass} onClick={this.props.clickHandler}>{this.props.label}</button>);
+    if (this.props.active==undefined || this.props.active==true)
+      var activeOnClick =this.props.clickHandler;
+    return (<button type="button" className={bclass} onClick={activeOnClick}>{this.props.label}</button>);
   }
 });
 

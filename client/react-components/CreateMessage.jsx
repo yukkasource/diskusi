@@ -86,7 +86,7 @@ let CreateMessage = React.createClass({
                 </div>
                 <div className="modal-footer">
                   <NormalButton buttonclass={'btn-default'} label={'Attach Files...'} clickHandler={this.handleAttachFiles}  />
-                  <NormalButton label={'Send'} clickHandler={this.sendHandler}/>
+                  <NormalButton label={'Send'} clickHandler={this.sendHandler} active={this.state.value!=''}/>
                 </div>
                 <div className="modal-body">
                   <div className="bs-component">
