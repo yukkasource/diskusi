@@ -72,14 +72,17 @@ var MessageStore = assign({}, EventEmitter.prototype,{
 });
 
 MessageStore.dispatchToken = AppDispatcher.register(function(action) {
+  var tmpFiles = [];
   switch(action.actionType) {
     case Constants.MSG_CREATE:
       console.log("create message: "+action.text);
-      _messages.push({id:(_messages.length+1).toString(),text:action.text, attachments:[], user:'user1'}); 
+      _messages.push({id:(_messages.length+1).toString(),text:action.text, attachments:tmpFiles, user:'user1'}); 
+      tmpFiles=[];
       MessageStore.emitChange();
       break;
     case Constants.UPLOAD_FILES:
       console.log("messageStore upload: "+action.files);
+      tmpFiles.push(action.files);
       MessageStore.emitChange();
       break;
     case Constants.STOP_UPLOAD_FILE:
